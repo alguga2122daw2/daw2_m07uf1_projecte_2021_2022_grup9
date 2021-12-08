@@ -1,5 +1,5 @@
 <?php
 interface IToString{
-    public function toString();
+    public function toString(): string;
 }
 ?>
