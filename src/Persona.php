@@ -1,5 +1,5 @@
 <?php
-abstract class Persona {
+abstract class Persona implements IToString {
     protected string $nom;
     protected string $cognom;
     protected string $adrecaFisica;
@@ -8,7 +8,7 @@ abstract class Persona {
     protected string $identificador;
     protected string $contrasenya;
 
-    function __construct($nom, $cognom, $adrecaFisica, $adrecaCorreu, $telefon, $identificador, $contrasenya){
+    public function __construct(string $nom, string $cognom, string $adrecaFisica, string $adrecaCorreu, int $telefon, string $identificador, string $contrasenya){
         $this->nom = $nom;
         $this->cognom = $cognom;
         $this->adrecaFisica = $adrecaFisica;
