@@ -1,3 +1,6 @@
+<?php
+include("includes.php");
+?>
 <html>
     <head>
         <title><?php echo $title; ?></title>

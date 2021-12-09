@@ -1,5 +1,4 @@
 <?php
-include ("Persona.php");
 
 class Usuari extends Persona{
     private bool $prestec;

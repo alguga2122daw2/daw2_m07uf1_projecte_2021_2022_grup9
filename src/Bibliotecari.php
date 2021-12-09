@@ -1,5 +1,5 @@
 <?php
-include ("Persona.php");
+
 
 class Bibliotecari extends Persona{
     private int $nSeguretatSocial;

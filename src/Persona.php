@@ -1,6 +1,4 @@
 <?php
-include ("IToString.php");
-
 abstract class Persona implements IToString{
     protected static array $personas = array();
     protected string $nom;

@@ -1,6 +1,4 @@
 <?php
-include("IpdfManager.php");
-include("IToString.php");
 class Llibre implements IpdfManager, IToString
 {
     public static $llibres=array();
