@@ -25,6 +25,13 @@ include("src/includes.php");
                 width: 200px;
                 height: 100px;
             }
+            #login {
+                width: 0px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
             #session_info{
                 position: fixed;
                 top: 5%;
@@ -38,9 +45,10 @@ include("src/includes.php");
         </style>
     </head>
     <body>
-        <div id="session_info">
-            <?php
-            // if (sesion_iniciada) muestra_datos_sesion();
-            // else muestra_formulario_login();
-            ?>
-        </div>
+    <?php
+echo basename(__FILE__);
+       //if ($filename != "index.php") {
+       if ($hidemenu != true) {
+           echo "<div id='session_info'></div>";
+       }
+    ?>
