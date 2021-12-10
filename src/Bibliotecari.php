@@ -1,6 +1,4 @@
 <?php
-
-
 class Bibliotecari extends Persona{
     private int $nSeguretatSocial;
     private string $iniciFeina;

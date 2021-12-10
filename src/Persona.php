@@ -32,63 +32,51 @@ abstract class Persona implements IToString{
         $this->nom = $nom;
     }
 
-    public function getCognom(): string
-    {
+    public function getCognom(): string{
         return $this->cognom;
     }
 
-    public function setCognom(string $cognom): void
-    {
+    public function setCognom(string $cognom): void{
         $this->cognom = $cognom;
     }
 
-    public function getAdrecaFisica(): string
-    {
+    public function getAdrecaFisica(): string{
         return $this->adrecaFisica;
     }
 
-    public function setAdrecaFisica(string $adrecaFisica): void
-    {
+    public function setAdrecaFisica(string $adrecaFisica): void{
         $this->adrecaFisica = $adrecaFisica;
     }
 
-    public function getAdrecaCorreu(): string
-    {
+    public function getAdrecaCorreu(): string{
         return $this->adrecaCorreu;
     }
 
-    public function setAdrecaCorreu(string $adrecaCorreu): void
-    {
+    public function setAdrecaCorreu(string $adrecaCorreu): void{
         $this->adrecaCorreu = $adrecaCorreu;
     }
 
-    public function getTelefon(): int
-    {
+    public function getTelefon(): int{
         return $this->telefon;
     }
 
-    public function setTelefon(int $telefon): void
-    {
+    public function setTelefon(int $telefon): void{
         $this->telefon = $telefon;
     }
 
-    public function getIdentificador(): string
-    {
+    public function getIdentificador(): string{
         return $this->identificador;
     }
 
-    public function setIdentificador(string $identificador): void
-    {
+    public function setIdentificador(string $identificador): void{
         $this->identificador = $identificador;
     }
 
-    public function getContrasenya(): string
-    {
+    public function getContrasenya(): string{
         return $this->contrasenya;
     }
 
-    public function setContrasenya(string $contrasenya): void
-    {
+    public function setContrasenya(string $contrasenya): void{
         $this->contrasenya = $contrasenya;
     }
 

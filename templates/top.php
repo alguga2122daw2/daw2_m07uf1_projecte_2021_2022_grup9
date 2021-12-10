@@ -1,5 +1,5 @@
 <?php
-include("includes.php");
+include("src/includes.php");
 ?>
 <html>
     <head>

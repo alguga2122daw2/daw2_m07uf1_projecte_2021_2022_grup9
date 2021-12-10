@@ -1,5 +1,6 @@
 <?php
-include ("Persona.php");
-include("IpdfManager.php");
-include("IToString.php");
-include ("IToString.php");
+include_once("IToString.php");
+include_once("Persona.php");
+include_once("Bibliotecari.php");
+include_once("Usuari.php");
+include_once("IpdfManager.php");

@@ -1,5 +1,4 @@
 <?php
-
 class Usuari extends Persona{
     private bool $prestec;
     private string $iniciPrestec; // Si no té deixat en préstec cap llibre la data serà 0.
