@@ -1,13 +1,19 @@
 <?php
+if (isset($_POST["logout"])){
+    session_start();
+    session_destroy();
+}
 $gestor=fopen("./UsrInfo", "r");
 $hidemenu = true;
 while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
     if($_POST["user"]==$datos[0] && $_POST["password"]==$datos[1]) {
         fclose($gestor);
-        header("Location: http://localhost:63342/proyectoPHP/pagina1.php");
-        session_name($_POST["user"]);
         session_start();
-        echo "correcto";
+        session_destroy();
+        session_start();
+        $_SESSION["user"]=$datos[0];
+        $_SESSION["rol"]=$datos[2];
+        header("Location: pagina1.php");
     }
 }
 ?>

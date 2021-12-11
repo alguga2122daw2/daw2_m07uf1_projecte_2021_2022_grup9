@@ -1,4 +1,7 @@
 <?php
+if ($hidemenu == false) {
+    session_start();
+}
 include("src/includes.php");
 ?>
 <html>
@@ -39,16 +42,30 @@ include("src/includes.php");
                 background-color: gray;
                 border: 5px solid black;
                 border-radius: 5%;
-                width: 200px;
-                height: 200px;
+                width: 300px;
+                height: 300px;
+                color:white;
+            }
+            .creationContainer{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                border: 5px solid black;
+                transform: translate(-50%, -50%);
+            }
+            .creationContainer *{
+                margin: 10px;
             }
         </style>
     </head>
     <body>
     <?php
-echo basename(__FILE__);
-       //if ($filename != "index.php") {
-       if ($hidemenu != true) {
-           echo "<div id='session_info'></div>";
-       }
+        //if ($filename != "index.php") {
+        if ($hidemenu == false) {
+           echo "<div id='session_info'><ul>",
+           "<li>Usuari: ", $_SESSION["user"],"</li>",
+           "<li>Categoria: ", $_SESSION["rol"],"</li>",
+           "<form action='index.php' method='post'><input type='hidden' name='logout'><input type='submit' value='logout'></form>",
+           "</ul></div>";
+        }
     ?>

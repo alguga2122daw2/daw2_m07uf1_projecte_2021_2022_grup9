@@ -8,14 +8,13 @@ class Llibre implements IpdfManager, IToString{
     private $iniciPrestec;
     private $identificadorUsuariPrestec;
 
-    public function __construct($llibres, $titol, $autor, $isbn, $prestec, $iniciPrestec, $identificadorUsuariPrestec){
-        $this->llibres = $llibres;
+    public function __construct($titol, $autor, $isbn){
         $this->titol = $titol;
         $this->autor = $autor;
         $this->isbn = $isbn;
-        $this->prestec = $prestec;
-        $this->iniciPrestec = $iniciPrestec;
-        $this->identificadorUsuariPrestec = $identificadorUsuariPrestec;
+        $this->prestec = false;
+        $this->iniciPrestec = null;
+        $this->identificadorUsuariPrestec = null;
         array_push(Llibre::$llibres,$this);
     }
 
