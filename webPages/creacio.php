@@ -1,21 +1,14 @@
-<?php include_once("../templates/top.php");?>
+<?php include_once($_SERVER['DOCUMENT_ROOT']."/templates/top.php");?>
 <?php
-include("../src/includes.php");
     switch($_POST["formulari"]) {
         case "llibres";
             new Llibre($_POST["titol"],$_POST["autor"],$_POST["isbn"]);
             break;
         case "usuaris";
-            $tempFile=fopen("../UsrInfo","a");
-            fwrite($tempFile,"\n".$_POST['nom'].",".$_POST['contrasenya'].",Usuari");
-            fclose($tempFile);
             new Usuari($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],intval($_POST["telefon"]),$_POST["identificador"],$_POST["contrasenya"]);
             break;
         case "bibliotecaris";
-            $tempFile=fopen("../UsrInfo","a");
-            fwrite($tempFile,"\n".$_POST['nom'].",".$_POST['contrasenya'].",Bibliotecari");
-            fclose($tempFile);
-            new Bibliotecari($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],$_POST["telefon"],$_POST["identificador"],$_POST["contrasenya"],$_POST["nSeguretatSocial"],$_POST["iniciFeina"],$_POST["salari"]);
+            new Bibliotecari($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],intval($_POST["telefon"]),$_POST["identificador"],$_POST["contrasenya"],intval($_POST["nSeguretatSocial"]),$_POST["iniciFeina"],intval($_POST["salari"]));
             break;
     }
 

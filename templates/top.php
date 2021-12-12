@@ -2,7 +2,7 @@
 if ($hidemenu == false) {
     session_start();
 }
-include("src/includes.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/src/includes.php");
 ?>
 <html>
     <head>

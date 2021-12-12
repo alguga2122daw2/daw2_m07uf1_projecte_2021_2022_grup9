@@ -9,6 +9,9 @@ class Usuari extends Persona{
         $this->prestec = false;
         $this->iniciPrestec = 0;
         $this->isbnPrestec = 0;
+        $tempFile=fopen("../csv/UsrInfo","a");
+        fwrite($tempFile,$nom.",".$cognom.",".$adrecaFisica.",".$adrecaCorreu.",".$telefon.",".$identificador.",".$contrasenya."\n");
+        fclose($tempFile);
     }
 
     public function isPrestec(): bool{

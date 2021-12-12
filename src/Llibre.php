@@ -16,6 +16,9 @@ class Llibre implements IpdfManager, IToString{
         $this->iniciPrestec = null;
         $this->identificadorUsuariPrestec = null;
         array_push(Llibre::$llibres,$this);
+        $tempFile=fopen("../csv/LlibresInfo","a");
+        fwrite($tempFile,$titol.",".$autor.",".$isbn.",".$this->prestec.",".$this->iniciPrestec.",".$this->identificadorUsuariPrestec."\n");
+        fclose($tempFile);
     }
 
     public static function getLlibres(): array{

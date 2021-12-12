@@ -11,6 +11,9 @@ class Bibliotecari extends Persona{
         $this->iniciFeina = $iniciFeina;
         $this->salari = $salari;
         $this->cap = false;
+        $tempFile=fopen("../csv/BibliotecarisInfo","a");
+        fwrite($tempFile,$nom.",".$cognom.",".$adrecaFisica.",".$adrecaCorreu.",".$telefon.",".$identificador.",".$contrasenya.",".$nSeguretatSocial.",".$iniciFeina.",".$salari."\n");
+        fclose($tempFile);
     }
 
     public function getNSeguretatSocial(): int{

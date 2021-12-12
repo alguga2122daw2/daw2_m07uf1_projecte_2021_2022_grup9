@@ -3,7 +3,7 @@ if (isset($_POST["logout"])){
     session_start();
     session_destroy();
 }
-$gestor=fopen("./UsrInfo", "r");
+$gestor=fopen("csv/UsrInfo", "r");
 $hidemenu = true;
 while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
     if($_POST["user"]==$datos[0] && $_POST["password"]==$datos[1]) {
