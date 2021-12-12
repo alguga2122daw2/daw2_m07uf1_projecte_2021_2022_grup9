@@ -84,4 +84,11 @@ class Llibre implements IpdfManager, IToString{
             ". \$iniciPrestec: " . $this->iniciPrestec . ". \$identificadorUsuariPrestec: " . $this->identificadorUsuariPrestec;
     }
 
+    public function availableGetters(): array{
+        return array("getTitol", "getAutor", "getIsbn", "getPrestec", "getIniciPrestec", "getIdentificadorUsuariPrestec");
+    }
+
+    public function getVariableNames(): array{
+        return array("titol","autor","ISBN","prestec","inici prestec","identificador usuari prestec");
+    }
 }
