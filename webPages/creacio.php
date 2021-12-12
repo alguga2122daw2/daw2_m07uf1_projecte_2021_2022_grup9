@@ -1,27 +1,34 @@
 <?php include_once("../templates/top.php");?>
 <?php
 include("../src/includes.php");
-    switch($_POST["formulari"]) {
-        case "llibres";
-            new Llibre($_POST["titol"],$_POST["autor"],$_POST["isbn"]);
-            break;
-        case "usuaris";
-            $tempFile=fopen("../UsrInfo","a");
-            fwrite($tempFile,"\n".$_POST['nom'].",".$_POST['contrasenya'].",Usuari");
-            fclose($tempFile);
-            new Usuari($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],intval($_POST["telefon"]),$_POST["identificador"],$_POST["contrasenya"]);
-            break;
-        case "bibliotecaris";
-            $tempFile=fopen("../UsrInfo","a");
-            fwrite($tempFile,"\n".$_POST['nom'].",".$_POST['contrasenya'].",Bibliotecari");
-            fclose($tempFile);
-            new Bibliotecari($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],$_POST["telefon"],$_POST["identificador"],$_POST["contrasenya"],$_POST["nSeguretatSocial"],$_POST["iniciFeina"],$_POST["salari"]);
-            break;
-    }
+// TODO: Reimplementar esto usando la funcion append_line()
+switch($_POST["formulari"]) {
+    case "llibres";
+        $tempFile=fopen("../csv/LlibresInfo","a");
+        //fwrite($tempFile,"\n".$_POST['nom'].",".$_POST['contrasenya'].",Usuari");
+        fwrite($tempFile,"\n".$_POST["titol"].",".$_POST["autor"].",".$_POST["isbn"]);
+        fclose($tempFile);
+        //new Llibre($_POST["titol"],$_POST["autor"],$_POST["isbn"]);
+        break;
+    case "usuaris";
+        $tempFile=fopen("../csv/UsuarisInfo","a");
+        //fwrite($tempFile,"\n".$_POST['nom'].",".$_POST['contrasenya'].",Usuari");
+        fwrite($tempFile,"\n".$_POST["nom"].",".$_POST["cognom"].",".$_POST["adrecaFisica"].",".$_POST["adrecaCorreu"].",".intval($_POST["telefon"]).",".$_POST["identificador"].",".$_POST["contrasenya"]);
+        fclose($tempFile);
+        //new Usuari($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],intval($_POST["telefon"]),$_POST["identificador"],$_POST["contrasenya"]);
+        break;
+    case "bibliotecaris";
+        $tempFile=fopen("../csv/BibliotecarisInfo","a");
+        //fwrite($tempFile,"\n".$_POST['nom'].",".$_POST['contrasenya'].",Bibliotecari");
+        fwrite($tempFile,"\n".$_POST["nom"].",".$_POST["cognom"].",".$_POST["adrecaFisica"].",".$_POST["adrecaCorreu"].",".$_POST["telefon"].",".$_POST["identificador"].",".$_POST["contrasenya"].",".$_POST["nSeguretatSocial"].",".$_POST["iniciFeina"].",".$_POST["salari"]);
+        fclose($tempFile);
+        //new Bibliotecari($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],$_POST["telefon"],$_POST["identificador"],$_POST["contrasenya"],$_POST["nSeguretatSocial"],$_POST["iniciFeina"],$_POST["salari"]);
+        break;
+}
 
-    switch ($_SERVER["QUERY_STRING"]) {
-        case "llibres":
-            echo "
+switch ($_GET["contingut"]) {
+    case "Llibre":
+        echo "
                 <div class='creationContainer'>
     <form action='creacio.php?llibres' method='post'>
         <input type='hidden' name='formulari' value='llibres'>
@@ -35,9 +42,9 @@ include("../src/includes.php");
     </form>
 </div>
             ";
-            break;
-        case "usuaris":
-            echo "
+        break;
+    case "Usuari":
+        echo "
                 <div class='creationContainer'>
     <form action='creacio.php?usuaris' method='post'>
         <input type='hidden' name='formulari' value='usuaris'>
@@ -66,9 +73,9 @@ include("../src/includes.php");
     </form>
 </div>
             ";
-            break;
-        case "bibliotecaris":
-            echo "
+        break;
+    case "Bibliotecari":
+        echo "
                 <div class='creationContainer'>
     <form action='creacio.php?bibliotecaris' method='post'>
         <input type='hidden' name='formulari' value='bibliotecaris'>
@@ -107,15 +114,9 @@ include("../src/includes.php");
 </div>
 
             ";
-            break;
-        default:
-            echo "Error";
-    }
+        break;
+    default:
+        echo "Error";
+}
 ?>
-<?php include('../templates/bottom.php')?>
-
-
-
-
-
-
+<?php include($_SERVER['DOCUMENT_ROOT']."/templates/bottom.php");?>

@@ -3,7 +3,9 @@ if (isset($_POST["logout"])){
     session_start();
     session_destroy();
 }
-$gestor=fopen("./UsrInfo", "r");
+
+// TODO: Implementar esto con read_file()
+$gestor=fopen("csv/UsuarisInfo", "r");
 $hidemenu = true;
 while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
     if($_POST["user"]==$datos[0] && $_POST["password"]==$datos[1]) {
@@ -17,7 +19,7 @@ while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
     }
 }
 ?>
-<?php $title = 'Index'; include("templates/top.php");?>
+<?php $title = 'Index'; include($_SERVER['DOCUMENT_ROOT']."/templates/top.php");?>
 
 
 <div id="login">
@@ -29,5 +31,4 @@ while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
         <input type="submit">
     </form>
 </div>
-<?php include("templates/bottom.php");?>
-
+<?php include($_SERVER['DOCUMENT_ROOT']."/templates/bottom.php");?>

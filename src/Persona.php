@@ -20,7 +20,7 @@ abstract class Persona implements IToString{
         array_push(self::$personas, $this);
     }
 
-    public static function getPersonas(): array{
+    public static function getObjects(): array{
         return self::$personas;
     }
 
