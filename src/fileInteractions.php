@@ -23,13 +23,13 @@ function append_line(string $filename,array $data):void{
     $tmpfile=fopen($_SERVER['DOCUMENT_ROOT']."/csv/".$filename, "a");
     switch($filename) {
         case "LlibresInfo";
-            fwrite($tmpfile,$data[0].",".$data[1].",".$data[2]);
+            fwrite($tmpfile,$data[0].",".$data[1].",".$data[2].",".$data[3].",".$data[4].",".$data[5]);
             break;
         case "UsuarisInfo";
             fwrite($tmpfile,$data[0].",".$data[1].",".$data[2].",".$data[3].",".intval($data[4]).",".$data[5].",".$data[0]);
             break;
         case "BibliotecarisInfo";
-            fwrite($tmpfile,$data[0].",".$data[1].",".$data[2].",".$data[3].",".intval($data[4]).",".$data[5].",".$data[6].",".$data[7].",".$data[8].",".floatval($data[9]).",".boolval($data[10]));
+            fwrite($tmpfile,$data[0].",".$data[1].",".$data[2].",".$data[3].",".intval($data[4]).",".$data[5].",".$data[6].",".$data[7].",".$data[8].",".floatval($data[9]).",".intval($data[10]));
             break;
     }
     fwrite($tmpfile,"\n");
@@ -41,12 +41,3 @@ function remove_line(string $filename,int $index):void{
     unset($tmpfile[$index]); // Borra la linea del aray especificada en $index
     file_put_contents($_SERVER['DOCUMENT_ROOT']."/csv/".$filename, implode("", $tmpfile)); // Escribe el array de nuevo al archivo
 }
-
-/* DEBUG
-append_line("BibliotecarisInfo",array("Pepe123","Colau",123,"123@pepe.pepe",157,"4R","abcd",44444,"2/2/2022",50,1));
-remove_line("BibliotecarisInfo",0);
-read_file("BibliotecarisInfo");
-foreach (Bibliotecari::getPersonas() as $key => $bibliotecari){
-    echo "$key\n".$bibliotecari->toString()."\n";
-}
-*/

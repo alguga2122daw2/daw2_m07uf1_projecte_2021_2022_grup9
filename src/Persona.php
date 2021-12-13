@@ -95,4 +95,3 @@ abstract class Persona implements IToString{
         return array("nom","cognom","adreça fisica","adreça correu","telèfon","identificador","contrasenya");
     }
 }
-?>

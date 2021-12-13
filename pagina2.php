@@ -7,7 +7,7 @@
             // echo "<a href='webPages/modificacio.php?contingut=Llibre'><input type='submit' value='MODIFICACIÓ'/></a>"; // Esto ya esta dentro de visualizar
         }
     ?>
-    <a href="webPages/visualitzacio.php?contingut=Llibre"><input type="submit" value="VISUALITZACIÓ"/></a>
+    <a href="webPages/visualitzacio.php?contingut=<?php echo $_GET["contingut"]?>"><input type="submit" value="VISUALITZACIÓ"/></a>
 
 </div>
 

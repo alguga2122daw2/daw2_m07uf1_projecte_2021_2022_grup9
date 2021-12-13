@@ -1,20 +1,22 @@
 <?php
+include("src/fileInteractions.php");
 if (isset($_POST["logout"])){
     session_start();
     session_destroy();
 }
 
-// TODO: Implementar esto con read_file()
-$gestor=fopen("csv/UsuarisInfo", "r");
-$hidemenu = true;
-while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
-    if($_POST["user"]==$datos[0] && $_POST["password"]==$datos[1]) {
-        fclose($gestor);
+// TODO: Permitir login de usuarios y bibliotecarios
+$logintype = "Bibliotecari";
+read_file($logintype."sInfo");
+foreach ($logintype::getObjects() as $object){
+    if($_POST["user"]==$object->getNom() && $_POST["password"]==$object->getContrasenya()){
         session_start();
         session_destroy();
         session_start();
-        $_SESSION["user"]=$datos[0];
-        $_SESSION["rol"]=$datos[2];
+        $_SESSION["user"]=$object->getNom();
+        $boss="";
+        if ($object->isCap()) $boss = "Cap";
+        $_SESSION["rol"]=$logintype.$boss;
         header("Location: pagina1.php");
     }
 }
