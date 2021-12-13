@@ -4,6 +4,7 @@ if (isset($_POST["logout"])){
     session_start();
     session_destroy();
 }
+$hidemenu = true;
 
 // TODO: Permitir login de usuarios y bibliotecarios
 $logintype = "Bibliotecari";

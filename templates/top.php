@@ -3,6 +3,7 @@ if ($hidemenu == false) {
     session_start();
 }
 include($_SERVER['DOCUMENT_ROOT']."/src/includes.php");
+// TODO: Implementar un botón custom en la pagina web para tirar hacia atras (lo pide el collados)
 ?>
 <html>
     <head>
@@ -65,6 +66,7 @@ include($_SERVER['DOCUMENT_ROOT']."/src/includes.php");
            echo "<div id='session_info'><ul>",
            "<li>Usuari: ", $_SESSION["user"],"</li>",
            "<li>Categoria: ", $_SESSION["rol"],"</li>",
+           "<li>Sessió: ", session_id(),"</li>",
            "<form action='/index.php' method='post'><input type='hidden' name='logout'><input type='submit' value='logout'></form>",
            "</ul></div>";
         }
