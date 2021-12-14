@@ -20,7 +20,7 @@ abstract class Persona implements IToString{
         array_push(self::$personas, $this);
     }
 
-    public static function getPersonas(): array{
+    public static function getObjects(): array{
         return self::$personas;
     }
 
@@ -86,5 +86,12 @@ abstract class Persona implements IToString{
         ". \$telefon: " . $this->telefon . ". \$identificador: " . $this->identificador .
         ". \$contrasenya: " . $this->contrasenya;
     }
+
+    public function availableGetters(): array{
+        return array("getNom","getCognom","getAdrecaFisica","getAdrecaCorreu","getTelefon","getIdentificador","getContrasenya");
+    }
+
+    public function getVariableNames(): array{
+        return array("nom","cognom","adreça fisica","adreça correu","telèfon","identificador","contrasenya");
+    }
 }
-?>

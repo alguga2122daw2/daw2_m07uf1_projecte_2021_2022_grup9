@@ -1,26 +1,23 @@
 <?php
 class Bibliotecari extends Persona{
-    private int $nSeguretatSocial;
+    private string $nSeguretatSocial;
     private string $iniciFeina;
     private float $salari;
     private bool $cap;
 
-    public function __construct(string $nom, string $cognom, string $adrecaFisica, string $adrecaCorreu, int $telefon, string $identificador, string $contrasenya, int $nSeguretatSocial, string $iniciFeina, float $salari){
+    public function __construct(string $nom, string $cognom, string $adrecaFisica, string $adrecaCorreu, int $telefon, string $identificador, string $contrasenya, string $nSeguretatSocial, string $iniciFeina, float $salari, bool $cap){
         parent::__construct($nom, $cognom, $adrecaFisica, $adrecaCorreu, $telefon, $identificador, $contrasenya);
         $this->nSeguretatSocial = $nSeguretatSocial;
         $this->iniciFeina = $iniciFeina;
         $this->salari = $salari;
-        $this->cap = false;
-        $tempFile=fopen("../csv/BibliotecarisInfo","a");
-        fwrite($tempFile,$nom.",".$cognom.",".$adrecaFisica.",".$adrecaCorreu.",".$telefon.",".$identificador.",".$contrasenya.",".$nSeguretatSocial.",".$iniciFeina.",".$salari."\n");
-        fclose($tempFile);
+        $this->cap = $cap;
     }
 
-    public function getNSeguretatSocial(): int{
+    public function getNSeguretatSocial(): string{
         return $this->nSeguretatSocial;
     }
 
-    public function setNSeguretatSocial(int $nSeguretatSocial): void{
+    public function setNSeguretatSocial(string $nSeguretatSocial): void{
         $this->nSeguretatSocial = $nSeguretatSocial;
     }
 
@@ -54,7 +51,15 @@ class Bibliotecari extends Persona{
         ". \$telefon: " . $this->telefon . ". \$identificador: " . $this->identificador .
         ". \$contrasenya: " . $this->contrasenya . ". \$nSeguretatSocial: " . $this->nSeguretatSocial .
         ". \$iniciFeina: " . $this->iniciFeina . ". \$salari: " . $this->salari . 
-        ". \$cap: " . $this->cap;
+        ". \$cap: " . var_export($this->cap,true);
+    }
+
+    public function availableGetters(): array{
+        return array("getNom","getCognom","getAdrecaFisica","getAdrecaCorreu","getTelefon","getIdentificador","getContrasenya","getNSeguretatSocial","getIniciFeina","getSalari","isCap");
+    }
+
+    public function getVariableNames(): array{
+        return array("nom","cognom","adreça fisica","adreça correu","telèfon","identificador","contrasenya","numero seguritat social","inici feina","salari","cap");
     }
 }
 ?>

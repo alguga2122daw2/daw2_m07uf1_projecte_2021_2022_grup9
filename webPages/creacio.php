@@ -1,20 +1,31 @@
-<?php include_once($_SERVER['DOCUMENT_ROOT']."/templates/top.php");?>
+<?php include_once("../templates/top.php");?>
 <?php
-    switch($_POST["formulari"]) {
-        case "llibres";
-            new Llibre($_POST["titol"],$_POST["autor"],$_POST["isbn"]);
+include("../src/includes.php");
+include("../src/fileInteractions.php");
+
+// TODO: Compactar esto un poco (cambiar $_POST["formulari"] para que su valor coincida con el que se asigna a $filename)
+if (isset($_POST["formulari"])){
+    switch($_POST["formulari"]){
+        case "llibres":
+            $filename = "Llibre";
+            $data = array($_POST["titol"],$_POST["autor"],$_POST["isbn"],0,0,0); // TODO: Permitir la creación de libros con $prestec, $iniciPrestec y $identificadorUsuariPrestec diferente a 0
             break;
-        case "usuaris";
-            new Usuari($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],intval($_POST["telefon"]),$_POST["identificador"],$_POST["contrasenya"]);
+        case "usuaris":
+            $filename = "Usuari";
+            $data = array($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],intval($_POST["telefon"]),$_POST["identificador"],$_POST["contrasenya"]);
             break;
-        case "bibliotecaris";
-            new Bibliotecari($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],intval($_POST["telefon"]),$_POST["identificador"],$_POST["contrasenya"],intval($_POST["nSeguretatSocial"]),$_POST["iniciFeina"],intval($_POST["salari"]));
+        case "bibliotecaris":
+            $filename = "Bibliotecari";
+            $data = array($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],$_POST["telefon"],$_POST["identificador"],$_POST["contrasenya"],$_POST["nSeguretatSocial"],$_POST["iniciFeina"],$_POST["salari"],0); // TODO: Permitir la creación de BibliotecariCap
             break;
     }
+    append_line($filename."sInfo",$data);
+    echo "$filename \"$data[0]\" afegit amb èxit.";
+}
 
-    switch ($_SERVER["QUERY_STRING"]) {
-        case "llibres":
-            echo "
+switch ($_GET["contingut"]) {
+    case "Llibre":
+        echo "
                 <div class='creationContainer'>
     <form action='creacio.php?llibres' method='post'>
         <input type='hidden' name='formulari' value='llibres'>
@@ -28,9 +39,9 @@
     </form>
 </div>
             ";
-            break;
-        case "usuaris":
-            echo "
+        break;
+    case "Usuari":
+        echo "
                 <div class='creationContainer'>
     <form action='creacio.php?usuaris' method='post'>
         <input type='hidden' name='formulari' value='usuaris'>
@@ -59,9 +70,9 @@
     </form>
 </div>
             ";
-            break;
-        case "bibliotecaris":
-            echo "
+        break;
+    case "Bibliotecari":
+        echo "
                 <div class='creationContainer'>
     <form action='creacio.php?bibliotecaris' method='post'>
         <input type='hidden' name='formulari' value='bibliotecaris'>
@@ -100,15 +111,10 @@
 </div>
 
             ";
-            break;
-        default:
-            echo "Error";
-    }
+        break;
+    default:
+        echo "";
+        break;
+}
 ?>
-<?php include('../templates/bottom.php')?>
-
-
-
-
-
-
+<?php include($_SERVER['DOCUMENT_ROOT']."/templates/bottom.php");?>

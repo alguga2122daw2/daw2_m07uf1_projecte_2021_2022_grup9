@@ -1,16 +1,16 @@
-<?php include("templates/top.php");?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/templates/top.php");?>
 
     <div id="container">
-        <a href="pagina2.php?llibres"><input type="submit" value="LLIBRES"/></a>
+        <a href="pagina2.php?contingut=Llibre"><input type="submit" value="LLIBRES"/></a>
         <?php
             if ($_SESSION["rol"] != "Usuari") {
-                echo "<a href='pagina2.php?usuaris''><input type='submit' value='USUARIS'/></a>";
+                echo "<a href='pagina2.php?contingut=Usuari''><input type='submit' value='USUARIS'/></a>";
             }
             if ($_SESSION["rol"]=="BibliotecariCap") {
-                echo "<a href='pagina2.php?bibliotecaris'><input type='submit' value='BIBLIOTECARIS'/></a>";
+                echo "<a href='pagina2.php?contingut=Bibliotecari'><input type='submit' value='BIBLIOTECARIS'/></a>";
             }
         ?>
-        <a href="pagina2.php?dadesPersonals"><input type="submit" value="DADES PERSONALS"/></a>
+        <a href="pagina2.php?contingut=dadesPersonals"><input type="submit" value="DADES PERSONALS"/></a>
     </div>
 
 

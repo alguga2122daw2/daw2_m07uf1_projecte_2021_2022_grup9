@@ -45,5 +45,13 @@ class Usuari extends Persona{
         ". \$contrasenya: " . $this->contrasenya . ". \$prestec: " . $this->prestec .
         ". \$iniciPrestec: " . $this->iniciPrestec . ". \$isbnPrestec: " . $this->isbnPrestec;
     }
+
+    public function availableGetters(): array{
+        return array("getNom","getCognom","getAdrecaFisica","getAdrecaCorreu","getTelefon","getIdentificador","getContrasenya","isPrestec","getIniciPrestec","getIsbnPrestec");
+    }
+
+    public function getVariableNames(): array{
+        return array("nom","cognom","adreça fisica","adreça correu","telèfon","identificador","contrasenya","prestec","inici prestec","isbn prestec");
+    }
 }
 ?>

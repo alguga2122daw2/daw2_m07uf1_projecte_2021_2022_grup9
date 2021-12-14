@@ -1,27 +1,24 @@
 <?php
 class Llibre implements IpdfManager, IToString{
-    private static $llibres = array();
-    private $titol;
-    private $autor;
-    private $isbn;
-    private $prestec;
-    private $iniciPrestec;
-    private $identificadorUsuariPrestec;
+    private static array $llibres = array();
+    private string $titol;
+    private string $autor;
+    private string $isbn;
+    private bool $prestec;
+    private string $iniciPrestec;
+    private string $identificadorUsuariPrestec;
 
-    public function __construct($titol, $autor, $isbn){
+    public function __construct(string $titol, string $autor, string $isbn, bool $prestec, string $iniciPrestec, string $identificadorUsuariPrestec){
         $this->titol = $titol;
         $this->autor = $autor;
         $this->isbn = $isbn;
-        $this->prestec = false;
-        $this->iniciPrestec = null;
-        $this->identificadorUsuariPrestec = null;
-        array_push(Llibre::$llibres,$this);
-        $tempFile=fopen("../csv/LlibresInfo","a");
-        fwrite($tempFile,$titol.",".$autor.",".$isbn.",".$this->prestec.",".$this->iniciPrestec.",".$this->identificadorUsuariPrestec."\n");
-        fclose($tempFile);
+        $this->prestec = $prestec;
+        $this->iniciPrestec = $iniciPrestec;
+        $this->identificadorUsuariPrestec = $identificadorUsuariPrestec;
+        array_push(self::$llibres, $this);
     }
 
-    public static function getLlibres(): array{
+    public static function getObjects(): array{
         return self::$llibres;
     }
 
@@ -87,4 +84,11 @@ class Llibre implements IpdfManager, IToString{
             ". \$iniciPrestec: " . $this->iniciPrestec . ". \$identificadorUsuariPrestec: " . $this->identificadorUsuariPrestec;
     }
 
+    public function availableGetters(): array{
+        return array("getTitol", "getAutor", "getIsbn", "getPrestec", "getIniciPrestec", "getIdentificadorUsuariPrestec");
+    }
+
+    public function getVariableNames(): array{
+        return array("titol","autor","ISBN","prestec","inici prestec","identificador usuari prestec");
+    }
 }
