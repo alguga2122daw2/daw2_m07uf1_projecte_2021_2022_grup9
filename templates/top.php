@@ -1,6 +1,16 @@
 <?php
 if ($hidemenu == false) {
     session_start();
+    if (!isset($_SESSION["pageArray"])) $_SESSION["pageArray"]=array();
+    if ($_SESSION["pageArray"][sizeof($_SESSION["pageArray"])-1] != "http://{$_SERVER[HTTP_HOST]}{$_SERVER[REQUEST_URI]}"){
+        array_push($_SESSION["pageArray"], "http://{$_SERVER[HTTP_HOST]}{$_SERVER[REQUEST_URI]}");
+    }
+}
+if (isset($_POST["lastPage"])) {
+    if (sizeof($_SESSION["pageArray"])>1){
+        array_pop($_SESSION["pageArray"]);
+    }
+    header("location: {$_SESSION["pageArray"][sizeof($_SESSION["pageArray"])-1]}");
 }
 include($_SERVER['DOCUMENT_ROOT']."/src/includes.php");
 // TODO: Implementar un botón custom en la pagina web para tirar hacia atras (lo pide el collados)
@@ -61,9 +71,9 @@ include($_SERVER['DOCUMENT_ROOT']."/src/includes.php");
     </head>
     <body>
     <?php
-        echo "<input type='button' value='<'>";
         //if ($filename != "index.php") {
         if ($hidemenu == false) {
+            echo "<form method='post'><input type='hidden' name='lastPage' value='{$_SERVER['HTTP_REFERER']}'><input type='submit' value='<'></form>";
            echo "<div id='session_info'><ul>",
            "<li>Usuari: ", $_SESSION["user"],"</li>",
            "<li>Categoria: ", $_SESSION["rol"],"</li>",

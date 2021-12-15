@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 include("src/fileInteractions.php");
 if (isset($_POST["logout"])){
     session_start();
@@ -28,7 +25,7 @@ foreach (Persona::getObjects() as $object){
         $_SESSION["user"]=$object->getNom();
         $_SESSION["identificador"]=$object->getIdentificador();
         $boss="";
-        if ($object instanceof Bibiotecari) {
+        if ($object instanceof Bibliotecari) {
             if ($object->isCap()) $boss = "Cap";
         }
         $_SESSION["rol"]=get_class($object).$boss;
