@@ -34,8 +34,8 @@ function generarTaula($class){
         foreach ($getters as $getter){
             echo "<td>" . var_export($value->$getter(),true) . "</td>";
         }
-        echo "<td><form action='/webPages/modificacio.php' method='get'><input type='hidden' name='contingut' value='$class'><input type='hidden' name='id' value='$key'><input type='submit' value='modificar'></form></td>";
-        echo "<td><form action='/webPages/eliminacio.php' method='get'><input type='hidden' name='contingut' value='$class'><input type='hidden' name='id' value='$key'><input type='submit' value='eliminar'></form></td>";
+        echo "<td><form action='modificacio.php' method='POST'><input type='hidden' name='contingut' value='$class'><input type='hidden' name='id' value='$key'><input type='hidden' name='_method' value='PUT'><input type='submit' value='modificar'></form></td>";
+        echo "<td><form action='eliminacio.php' method='get'><input type='hidden' name='contingut' value='$class'><input type='hidden' name='id' value='$key'><input type='hidden' name='_method' value='DELETE'><input type='submit' value='eliminar'></form></td>";
         echo "</tr>\n";
     }
     echo "</table>";

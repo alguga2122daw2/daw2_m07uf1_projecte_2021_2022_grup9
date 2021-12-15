@@ -101,4 +101,14 @@ abstract class Persona implements IToString{
     public function getVariableNames(): array{
         return array("nom","cognom","adreça fisica","adreça correu","telèfon","identificador","contrasenya");
     }
+
+    function __destruct() {
+        $i = 0;
+        foreach (Persona::$personas as $persona) {
+            if ($persona->getIdentificador() == $this->getIdentificador()) {
+                unset(Persona::$personas[$i]);
+            }
+            $i++;
+        }
+    }
 }
