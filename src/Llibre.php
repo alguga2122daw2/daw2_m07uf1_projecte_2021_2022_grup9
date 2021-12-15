@@ -1,4 +1,7 @@
 <?php
+include_once("/var/www/vendor/autoload.php");
+use Dompdf\Dompdf;
+
 class Llibre implements IpdfManager, IToString{
     private static array $llibres = array();
     private string $titol;
@@ -75,7 +78,14 @@ class Llibre implements IpdfManager, IToString{
     }
 
     public static function crearPDF():void{
-        // TODO: Implement crearPDF() method.
+        if ($_GET['Imprimir']=="true") {
+            session_start();
+            $dompdf = new Dompdf();
+            $dompdf->setPaper('a4', 'landscape');
+            $dompdf->loadHtml($_SESSION["render_table"]);
+            $dompdf->render();
+            $dompdf->stream();
+        }
     }
 
     public function toString():string{
@@ -85,11 +95,6 @@ class Llibre implements IpdfManager, IToString{
         }
         $tmp.="</ul>";
         return $tmp;
-        /*
-        return "\$titol: " . $this->titol . ". \$autor: " . $this->autor .
-            ". \$isbn: " . $this->isbn . ". \$prestec" . $this->prestec .
-            ". \$iniciPrestec: " . $this->iniciPrestec . ". \$identificadorUsuariPrestec: " . $this->identificadorUsuariPrestec;
-        */
     }
 
     public function availableGetters(): array{

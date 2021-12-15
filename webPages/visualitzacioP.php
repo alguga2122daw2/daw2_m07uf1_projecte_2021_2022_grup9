@@ -5,17 +5,11 @@
         read_file($userType."sInfo");
         foreach($userType::getObjects() as $field) {
             if ($field->getIdentificador()==$_SESSION["identificador"]) {
-                echo "<ul>";
-                echo $field->toString();
-                /*
-                for ($i = 0; $i < count($field->availableGetters()); $i++) {
-                    $tmp=$field->availableGetters()[$i];
-                    echo "<li>",$field->getVariableNames()[$i],"-->",$field->$tmp(),"</li>";
-                }*/
-                echo "</ul>";
+                // TODO: No se ve el valor de prestec (convertir boolean a string)
+                echo "<ul>" . $field->toString() . "</ul>";
                 break;
             }
         }
     ?>
 </div>
-<?php include($_SERVER['DOCUMENT_ROOT']."templates/bottom.php")?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/templates/bottom.php")?>

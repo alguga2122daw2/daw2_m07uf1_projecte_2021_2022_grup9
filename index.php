@@ -14,22 +14,23 @@ if (isset($_POST["logout"])){
 }
 $hidemenu = true;
 
-// TODO: Permitir login de usuarios y bibliotecarios
 read_file("BibliotecarisInfo");
 read_file("UsuarisInfo");
 foreach (Persona::getObjects() as $object){
-    if($_POST["user"]==$object->getNom() && $_POST["password"]==$object->getContrasenya()){
-        session_start();
-        session_destroy();
-        session_start();
-        $_SESSION["user"]=$object->getNom();
-        $_SESSION["identificador"]=$object->getIdentificador();
-        $boss="";
-        if ($object instanceof Bibliotecari) {
-            if ($object->isCap()) $boss = "Cap";
+    if (isset($_POST["user"]) && isset($_POST["password"])){
+        if($_POST["user"]==$object->getNom() && $_POST["password"]==$object->getContrasenya()){
+            session_start();
+            session_destroy();
+            session_start();
+            $_SESSION["user"]=$object->getNom();
+            $_SESSION["identificador"]=$object->getIdentificador();
+            $boss="";
+            if ($object instanceof Bibliotecari) {
+                if ($object->isCap()) $boss = "Cap";
+            }
+            $_SESSION["rol"]=get_class($object).$boss;
+            header("Location: pagina1.php");
         }
-        $_SESSION["rol"]=get_class($object).$boss;
-        header("Location: pagina1.php");
     }
 }
 ?>

@@ -2,8 +2,8 @@
 if ($hidemenu == false) {
     session_start();
     if (!isset($_SESSION["pageArray"])) $_SESSION["pageArray"]=array();
-    if ($_SESSION["pageArray"][sizeof($_SESSION["pageArray"])-1] != "http://{$_SERVER[HTTP_HOST]}{$_SERVER[REQUEST_URI]}"){
-        array_push($_SESSION["pageArray"], "http://{$_SERVER[HTTP_HOST]}{$_SERVER[REQUEST_URI]}");
+    if ($_SESSION["pageArray"][sizeof($_SESSION["pageArray"])-1] != "http://{$_SERVER["HTTP_HOST"]}{$_SERVER["REQUEST_URI"]}"){
+        array_push($_SESSION["pageArray"], "http://{$_SERVER["HTTP_HOST"]}{$_SERVER["REQUEST_URI"]}");
     }
 }
 if (isset($_POST["lastPage"])) {
@@ -12,8 +12,20 @@ if (isset($_POST["lastPage"])) {
     }
     header("location: {$_SESSION["pageArray"][sizeof($_SESSION["pageArray"])-1]}");
 }
+
+function redirectTohttps(){
+    if(!isset($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] != "on")
+    {
+        //Tell the browser to redirect to the HTTPS URL.
+        header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], true, 301);
+        //Prevent the rest of the script from executing.
+        exit;
+    }
+}
+
+redirectTohttps();
+
 include($_SERVER['DOCUMENT_ROOT']."/src/includes.php");
-// TODO: Implementar un botón custom en la pagina web para tirar hacia atras (lo pide el collados)
 ?>
 <html>
     <head>
@@ -79,7 +91,7 @@ include($_SERVER['DOCUMENT_ROOT']."/src/includes.php");
            "<li>Categoria: ", $_SESSION["rol"],"</li>",
            "<li>Identificador: ", $_SESSION["identificador"],"</li>",
            "<li>Sessió: ", session_id(),"</li>",
-           "<form action='http://$_SERVER[HTTP_HOST]/proyectoPHP/index.php' method='post'><br><input type='hidden' name='logout'><input type='submit' value='logout'></form>",
+           "<form action='https://".$_SERVER["HTTP_HOST"]."/index.php' method='post'><br><input type='hidden' name='logout'><input type='submit' value='logout'></form>",
            "</ul></div>";
         }
     ?>

@@ -52,13 +52,6 @@ class Bibliotecari extends Persona{
         }
         $tmp.="</ul>";
         return $tmp;
-        /*
-        return "\$nom: " . $this->nom . ". \$cognom: " . $this->cognom .
-        ". \$adrecaFisica: " . $this->adrecaFisica . ". \$adrecaCorreu" . $this->adrecaCorreu .
-        ". \$telefon: " . $this->telefon . ". \$identificador: " . $this->identificador .
-        ". \$contrasenya: " . $this->contrasenya . ". \$nSeguretatSocial: " . $this->nSeguretatSocial .
-        ". \$iniciFeina: " . $this->iniciFeina . ". \$salari: " . $this->salari .
-        ". \$cap: " . var_export($this->cap,true);*/
     }
 
     public function availableGetters(): array{

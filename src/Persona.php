@@ -87,11 +87,6 @@ abstract class Persona implements IToString{
         }
         $tmp.="</ul>";
         return $tmp;
-        /*
-        return "\$nom: " . $this->nom . ". \$cognom: " . $this->cognom .
-        ". \$adrecaFisica: " . $this->adrecaFisica . ". \$adrecaCorreu" . $this->adrecaCorreu .
-        ". \$telefon: " . $this->telefon . ". \$identificador: " . $this->identificador .
-        ". \$contrasenya: " . $this->contrasenya;*/
     }
 
     public function availableGetters(): array{

@@ -42,12 +42,6 @@ class Usuari extends Persona{
         }
         $tmp.="</ul>";
         return $tmp;
-        /*
-        return "\$nom: " . $this->nom . ". \$cognom: " . $this->cognom .
-        ". \$adrecaFisica: " . $this->adrecaFisica . ". \$adrecaCorreu" . $this->adrecaCorreu .
-        ". \$telefon: " . $this->telefon . ". \$identificador: " . $this->identificador .
-        ". \$contrasenya: " . $this->contrasenya . ". \$prestec: " . $this->prestec .
-        ". \$iniciPrestec: " . $this->iniciPrestec . ". \$isbnPrestec: " . $this->isbnPrestec;*/
     }
 
     public function availableGetters(): array{
