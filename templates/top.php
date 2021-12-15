@@ -26,7 +26,7 @@ include($_SERVER['DOCUMENT_ROOT']."/src/includes.php");
                 transform: translate(-50%, -50%);
             }
             #container input, #containerCRUD input {
-                width: 200px;
+                width: 220px;
                 height: 100px;
             }
             #login {
@@ -45,7 +45,7 @@ include($_SERVER['DOCUMENT_ROOT']."/src/includes.php");
                 border-radius: 5%;
                 width: 300px;
                 height: 300px;
-                color:white;
+                color: #ffffff;
             }
             .creationContainer{
                 position: absolute;
@@ -61,13 +61,15 @@ include($_SERVER['DOCUMENT_ROOT']."/src/includes.php");
     </head>
     <body>
     <?php
+        echo "<input type='button' value='<'>";
         //if ($filename != "index.php") {
         if ($hidemenu == false) {
            echo "<div id='session_info'><ul>",
            "<li>Usuari: ", $_SESSION["user"],"</li>",
            "<li>Categoria: ", $_SESSION["rol"],"</li>",
+           "<li>Identificador: ", $_SESSION["identificador"],"</li>",
            "<li>Sessió: ", session_id(),"</li>",
-           "<form action='/index.php' method='post'><input type='hidden' name='logout'><input type='submit' value='logout'></form>",
+           "<form action='http://$_SERVER[HTTP_HOST]/proyectoPHP/index.php' method='post'><br><input type='hidden' name='logout'><input type='submit' value='logout'></form>",
            "</ul></div>";
         }
     ?>

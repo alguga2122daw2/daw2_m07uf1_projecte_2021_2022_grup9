@@ -81,10 +81,17 @@ abstract class Persona implements IToString{
     }
 
     public function toString(): string{
+        $tmp="<ul>";
+        foreach($this as $key => $value) {
+            $tmp.="<li>$key: $value</li>";
+        }
+        $tmp.="</ul>";
+        return $tmp;
+        /*
         return "\$nom: " . $this->nom . ". \$cognom: " . $this->cognom .
         ". \$adrecaFisica: " . $this->adrecaFisica . ". \$adrecaCorreu" . $this->adrecaCorreu .
         ". \$telefon: " . $this->telefon . ". \$identificador: " . $this->identificador .
-        ". \$contrasenya: " . $this->contrasenya;
+        ". \$contrasenya: " . $this->contrasenya;*/
     }
 
     public function availableGetters(): array{

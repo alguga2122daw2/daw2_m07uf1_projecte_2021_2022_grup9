@@ -79,9 +79,17 @@ class Llibre implements IpdfManager, IToString{
     }
 
     public function toString():string{
+        $tmp="<ul>";
+        foreach($this as $key => $value) {
+            $tmp.="<li>$key: $value</li>";
+        }
+        $tmp.="</ul>";
+        return $tmp;
+        /*
         return "\$titol: " . $this->titol . ". \$autor: " . $this->autor .
             ". \$isbn: " . $this->isbn . ". \$prestec" . $this->prestec .
             ". \$iniciPrestec: " . $this->iniciPrestec . ". \$identificadorUsuariPrestec: " . $this->identificadorUsuariPrestec;
+        */
     }
 
     public function availableGetters(): array{

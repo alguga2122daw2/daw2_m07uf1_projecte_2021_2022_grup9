@@ -1,8 +1,5 @@
 <?php include_once("../templates/top.php");?>
 <?php
-include("../src/includes.php");
-include("../src/fileInteractions.php");
-
 $contingut = $_GET["contingut"]; // El nombre de la clase
 $id = $_GET["id"]; // El indice del array
 read_file($contingut."sInfo"); // Lee el archivo que corresponda con la clase

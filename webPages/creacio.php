@@ -1,26 +1,32 @@
 <?php include_once("../templates/top.php");?>
 <?php
-include("../src/includes.php");
-include("../src/fileInteractions.php");
-
 // TODO: Compactar esto un poco (cambiar $_POST["formulari"] para que su valor coincida con el que se asigna a $filename)
 if (isset($_POST["formulari"])){
-    switch($_POST["formulari"]){
-        case "llibres":
-            $filename = "Llibre";
-            $data = array($_POST["titol"],$_POST["autor"],$_POST["isbn"],0,0,0); // TODO: Permitir la creación de libros con $prestec, $iniciPrestec y $identificadorUsuariPrestec diferente a 0
-            break;
-        case "usuaris":
-            $filename = "Usuari";
-            $data = array($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],intval($_POST["telefon"]),$_POST["identificador"],$_POST["contrasenya"]);
-            break;
-        case "bibliotecaris":
-            $filename = "Bibliotecari";
-            $data = array($_POST["nom"],$_POST["cognom"],$_POST["adrecaFisica"],$_POST["adrecaCorreu"],$_POST["telefon"],$_POST["identificador"],$_POST["contrasenya"],$_POST["nSeguretatSocial"],$_POST["iniciFeina"],$_POST["salari"],0); // TODO: Permitir la creación de BibliotecariCap
-            break;
+    $password = $_POST["contrasenya"];
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number    = preg_match('@[0-9]@', $password);
+    $specialChars = preg_match('@[^\w]@', $password);
+    if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+        echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
+    }else {
+        switch ($_POST["formulari"]) {
+            case "llibres":
+                $filename = "Llibre";
+                $data = array($_POST["titol"], $_POST["autor"], $_POST["isbn"], 0, 0, 0); // TODO: Permitir la creación de libros con $prestec, $iniciPrestec y $identificadorUsuariPrestec diferente a 0
+                break;
+            case "usuaris":
+                $filename = "Usuari";
+                $data = array($_POST["nom"], $_POST["cognom"], $_POST["adrecaFisica"], $_POST["adrecaCorreu"], intval($_POST["telefon"]), $_POST["identificador"], $_POST["contrasenya"]);
+                break;
+            case "bibliotecaris":
+                $filename = "Bibliotecari";
+                $data = array($_POST["nom"], $_POST["cognom"], $_POST["adrecaFisica"], $_POST["adrecaCorreu"], $_POST["telefon"], $_POST["identificador"], $_POST["contrasenya"], $_POST["nSeguretatSocial"], $_POST["iniciFeina"], $_POST["salari"], 0); // TODO: Permitir la creación de BibliotecariCap
+                break;
+        }
+        append_line($filename . "sInfo", $data);
+        echo "$filename \"$data[0]\" afegit amb èxit.";
     }
-    append_line($filename."sInfo",$data);
-    echo "$filename \"$data[0]\" afegit amb èxit.";
 }
 
 switch ($_GET["contingut"]) {

@@ -9,9 +9,6 @@ class Usuari extends Persona{
         $this->prestec = false;
         $this->iniciPrestec = 0;
         $this->isbnPrestec = 0;
-        $tempFile=fopen("../csv/UsrInfo","a");
-        fwrite($tempFile,$nom.",".$cognom.",".$adrecaFisica.",".$adrecaCorreu.",".$telefon.",".$identificador.",".$contrasenya."\n");
-        fclose($tempFile);
     }
 
     public function isPrestec(): bool{
@@ -39,11 +36,18 @@ class Usuari extends Persona{
     }
 
     public function toString(): string{
+        $tmp="<ul>";
+        foreach($this as $key => $value) {
+            $tmp.="<li>$key: $value</li>";
+        }
+        $tmp.="</ul>";
+        return $tmp;
+        /*
         return "\$nom: " . $this->nom . ". \$cognom: " . $this->cognom .
         ". \$adrecaFisica: " . $this->adrecaFisica . ". \$adrecaCorreu" . $this->adrecaCorreu .
         ". \$telefon: " . $this->telefon . ". \$identificador: " . $this->identificador .
         ". \$contrasenya: " . $this->contrasenya . ". \$prestec: " . $this->prestec .
-        ". \$iniciPrestec: " . $this->iniciPrestec . ". \$isbnPrestec: " . $this->isbnPrestec;
+        ". \$iniciPrestec: " . $this->iniciPrestec . ". \$isbnPrestec: " . $this->isbnPrestec;*/
     }
 
     public function availableGetters(): array{

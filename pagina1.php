@@ -10,7 +10,7 @@
                 echo "<a href='pagina2.php?contingut=Bibliotecari'><input type='submit' value='BIBLIOTECARIS'/></a>";
             }
         ?>
-        <a href="pagina2.php?contingut=dadesPersonals"><input type="submit" value="DADES PERSONALS"/></a>
+        <a href="./webPages/visualitzacioP.php?contingut=dadesPersonals"><input type="submit" value="DADES PERSONALS"/></a>
     </div>
 
 

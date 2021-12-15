@@ -1,7 +1,16 @@
 <?php $title = 'Visualització'; include($_SERVER['DOCUMENT_ROOT']."/templates/top.php");?>
 
 <?php
-include("../src/fileInteractions.php");
+include_once "/home/albert/Documents/M07_Collados/proyectoPHP/.idea/vendor/autoload.php";
+use Dompdf\Dompdf;
+
+
+if ($_GET['Imprimir']=="true") {
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml('<h1>Hola mundo</h1><br>');
+    $dompdf->render();
+    $dompdf->stream();
+}
 $contingut = $_GET["contingut"];
 read_file($contingut."sInfo");
 
@@ -33,6 +42,7 @@ function generarTaula($class){
 }
 
 generarTaula($contingut);
+echo "<br><form action='visualitzacio.php' method='get'><input type='hidden' name='Imprimir' value='true'><input type='submit' value='Imprimir PDF'></form>";
 
 ?>
 
