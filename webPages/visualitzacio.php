@@ -30,9 +30,11 @@ function generarTaula($class){
         foreach ($getters as $getter){
             $render .= "<td>" . var_export($value->$getter(),true) . "</td>";
         }
+        if ($_SESSION["rol"] != "Usuari") {
         $render .= "<td><form action='modificacio.php' method='POST'><input type='hidden' name='contingut' value='$class'><input type='hidden' name='id' value='$key'><input type='hidden' name='_method' value='PUT'><input type='submit' value='modificar'></form></td>";
         $render .= "<td><form action='eliminacio.php' method='get'><input type='hidden' name='contingut' value='$class'><input type='hidden' name='id' value='$key'><input type='hidden' name='_method' value='DELETE'><input type='submit' value='eliminar'></form></td>";
         $render .= "</tr>\n";
+        }
     }
     $render .= "</table>";
     $_SESSION["render_table"] = $render;

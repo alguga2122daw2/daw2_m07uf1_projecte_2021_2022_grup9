@@ -48,7 +48,11 @@ class Bibliotecari extends Persona{
     public function toString(): string{
         $tmp="<ul>";
         foreach($this as $key => $value) {
-            $tmp.="<li>$key: $value</li>";
+            if ($key == "cap"){
+                $tmp.="<li>$key: ". var_export($value, true). "</li>";
+            } else {
+                $tmp.="<li>$key: $value</li>";
+            }
         }
         $tmp.="</ul>";
         return $tmp;

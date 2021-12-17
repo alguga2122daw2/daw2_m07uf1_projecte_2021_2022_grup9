@@ -10,7 +10,16 @@ if ($_POST["_method"]=="PUT") {
         $filename = $_POST["formulari"];
         switch ($filename) {
             case "Llibre":
-                $data = array($_POST["titol"], $_POST["autor"], $_POST["isbn"], 0, 0, 0); // TODO: Permitir la creación de libros con $prestec, $iniciPrestec y $identificadorUsuariPrestec diferente a 0
+                $data = array($_POST["titol"], $_POST["autor"], $_POST["isbn"], $_POST["prestec"], $_POST["iniciPrestec"], $_POST["identificadorUsuariPrestec"]); // TODO: Permitir la creación de libros con $prestec, $iniciPrestec y $identificadorUsuariPrestec diferente a 0
+                read_file("UsuarisInfo");
+                $indexUser=O;
+                foreach($data as $valor){
+                    if ($valor.getIdentificadorUsuariPrestec() == $_POST["identificadorUsuariPrestec"]){
+                        break;
+                    }
+                    $indexUser++;
+                }
+                replace_line($filename . "sInfo", $indexUser, $data);
                 break;
             case "Usuari":
                 $data = array($_POST["nom"], $_POST["cognom"], $_POST["adrecaFisica"], $_POST["adrecaCorreu"], intval($_POST["telefon"]), $_POST["identificador"], $_POST["contrasenya"]);
@@ -42,6 +51,12 @@ if ($_POST["_method"]=="PUT") {
         <input type='text' id='autor' name='autor' value='" . $object->getAutor() . "'></br>
         <label for='isbn'>ISBN:</label>
         <input type='text' id='isbn' name='isbn' value='" . $object->getIsbn() . "'></br>
+        <label for='prestec'>Prestec:</label>
+        <input type='text' id='prestec' name='prestec' value='" . $object->getPrestec() . "'></br>
+        <label for='iniciPrestec'>Inici prestec:</label>
+        <input type='text' id='iniciPrestec' name='iniciPrestec' value='" . $object->getIniciPrestec() . "'></br>
+        <label for='identificadorUsuariPrestec'>Identificador usuari prestec:</label>
+        <input type='text' id='identificadorUsuariPrestec' name='identificadorUsuariPrestec' value='" . $object->getIdentificadorUsuariPrestec() . "'></br>
         <input type='submit' value='Enviar'>
     </form>
 </div>
