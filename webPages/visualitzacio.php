@@ -1,12 +1,6 @@
 <?php $title = 'Visualització'; include($_SERVER['DOCUMENT_ROOT']."/templates/top.php");?>
 
 <?php
-if ($_GET['Imprimir']=="true") {
-    $dompdf = new Dompdf();
-    $dompdf->loadHtml('<h1>Hola mundo</h1><br>');
-    $dompdf->render();
-    $dompdf->stream();
-}
 $contingut = $_GET["contingut"];
 read_file($contingut."sInfo");
 
@@ -21,7 +15,7 @@ function generarTaula($class){
     foreach ($varnames as $varname){
         $render .= "<th>$varname</th>";
     }
-    $render .= "<th colspan='2'>gestió</th>";
+    $render .= ($_SESSION["rol"] != "Usuari") ? "<th colspan='2'>gestió</th>" : ""; // Operador ternario, si el rol no es Usuari se muestra el <th>, sino no se muestra nada.
     $render .= "</tr>\n";
 
     // Contingut de la taula
@@ -31,9 +25,9 @@ function generarTaula($class){
             $render .= "<td>" . var_export($value->$getter(),true) . "</td>";
         }
         if ($_SESSION["rol"] != "Usuari") {
-        $render .= "<td><form action='modificacio.php' method='POST'><input type='hidden' name='contingut' value='$class'><input type='hidden' name='id' value='$key'><input type='hidden' name='_method' value='PUT'><input type='submit' value='modificar'></form></td>";
-        $render .= "<td><form action='eliminacio.php' method='get'><input type='hidden' name='contingut' value='$class'><input type='hidden' name='id' value='$key'><input type='hidden' name='_method' value='DELETE'><input type='submit' value='eliminar'></form></td>";
-        $render .= "</tr>\n";
+            $render .= "<td><form action='modificacio.php' method='POST'><input type='hidden' name='contingut' value='$class'><input type='hidden' name='id' value='$key'><input type='hidden' name='_method' value='PUT'><input type='submit' value='modificar'></form></td>";
+            $render .= "<td><form action='eliminacio.php' method='get'><input type='hidden' name='contingut' value='$class'><input type='hidden' name='id' value='$key'><input type='hidden' name='_method' value='DELETE'><input type='submit' value='eliminar'></form></td>";
+            $render .= "</tr>\n";
         }
     }
     $render .= "</table>";

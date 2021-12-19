@@ -84,7 +84,7 @@ class Llibre implements IpdfManager, IToString{
             $dompdf->setPaper('a4', 'landscape');
             $dompdf->loadHtml($_SESSION["render_table"]);
             $dompdf->render();
-            $dompdf->stream();
+            $dompdf->stream("never_gonna_give_you_up.pdf", array("Attachment" => true)); // Si "Attachment" tiene el valor "false" entonces el PDF se ve en el navegador, he preferido dejarlo en true para que se vea que el PDF efectivamente se descarga.
         }
     }
 

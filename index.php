@@ -14,8 +14,7 @@ if (isset($_POST["logout"])){
 }
 $hidemenu = true;
 
-read_file("BibliotecarisInfo");
-read_file("UsuarisInfo");
+if (isset($_POST["category"])) read_file($_POST["category"]."sInfo");
 foreach (Persona::getObjects() as $object){
     if (isset($_POST["user"]) && isset($_POST["password"])){
         if($_POST["user"]==$object->getNom() && $_POST["password"]==$object->getContrasenya()){
@@ -43,7 +42,11 @@ foreach (Persona::getObjects() as $object){
         <input type="text" id="user" name="user">
         <label for="password">Password:</label>
         <input type="password" id="password" name="password">
-        <input type="submit">
+        <select name="category" id="category">
+            <option value="Bibliotecari">Bibliotecari</option>
+            <option value="Usuari">Usuari</option>
+        </select>
+        <input type="submit" value='login'>
     </form>
 </div>
 <?php include($_SERVER['DOCUMENT_ROOT']."/templates/bottom.php");?>
