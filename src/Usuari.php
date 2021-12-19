@@ -4,11 +4,11 @@ class Usuari extends Persona{
     private string $iniciPrestec; // Si no té deixat en préstec cap llibre la data serà 0.
     private string $isbnPrestec; // Si no té deixat en préstec, l'ISBN serà 0.
 
-    public function __construct(string $nom, string $cognom, string $adrecaFisica, string $adrecaCorreu, int $telefon, string $identificador, string $contrasenya){
+    public function __construct(string $nom, string $cognom, string $adrecaFisica, string $adrecaCorreu, int $telefon, string $identificador, string $contrasenya, bool $prestec, string $iniciPrestec, string $isbnPrestec){
         parent::__construct($nom, $cognom, $adrecaFisica, $adrecaCorreu, $telefon, $identificador, $contrasenya);
-        $this->prestec = false;
-        $this->iniciPrestec = 0;
-        $this->isbnPrestec = 0;
+        $this->prestec = $prestec;
+        $this->iniciPrestec = $iniciPrestec;
+        $this->isbnPrestec = $isbnPrestec;
     }
 
     public function isPrestec(): bool{

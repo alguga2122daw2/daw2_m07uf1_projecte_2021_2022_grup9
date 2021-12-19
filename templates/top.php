@@ -47,7 +47,6 @@ function page_permissions(){
             break;
         // Se omite poner un case para BibliotecariCap porque ese rol tiene todos los permisos
     }
-    echo $_SERVER["SCRIPT_NAME"];
 }
 
 redirectTohttps();
