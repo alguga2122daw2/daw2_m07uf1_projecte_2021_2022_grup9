@@ -23,7 +23,35 @@ function redirectTohttps(){
     }
 }
 
+function exit_message() {
+    echo "No tens permis per veure aquesta pagina web.";
+    exit;
+}
+
+function page_permissions(){
+    switch ($_SESSION["rol"]){
+        case "Usuari":
+            if ($_SERVER["SCRIPT_NAME"] == "/webPages/modificacio.php" ||
+                $_SERVER["SCRIPT_NAME"] == "/webPages/eliminacio.php" ||
+                $_SERVER["SCRIPT_NAME"] == "/webPages/creacio.php"){ // Denegar acceso a modificacio.php, eliminacio.php y creacio.php
+                exit_message();
+            }elseif ($_GET["contingut"] == "Bibliotecari" ||
+                $_GET["contingut"] == "Usuari"){ // El usuario todavia puede acceder a visualitzacio.php, por ende hay que evitar que dentro de esa pagina pueda ver datos de Bibliotecari y Usuari
+                exit_message();
+            }
+            break;
+        case "Bibliotecari":
+            if ($_GET["contingut"] == "Bibliotecari"){ // Un Bibliotecari no puede ver datos de sus compañeros.
+                exit_message();
+            }
+            break;
+        // Se omite poner un case para BibliotecariCap porque ese rol tiene todos los permisos
+    }
+    echo $_SERVER["SCRIPT_NAME"];
+}
+
 redirectTohttps();
+page_permissions();
 
 include($_SERVER['DOCUMENT_ROOT']."/src/includes.php");
 ?>
