@@ -45,7 +45,11 @@ function page_permissions(){
                 exit_message();
             }
             break;
-        // Se omite poner un case para BibliotecariCap porque ese rol tiene todos los permisos
+        case "BibliotecariCap": // Es necesario poner esto aunque este vacio porque el comportamiento por defecto es decir que no tienes permiso a ver ninguna pagina excepto index.php
+            break;
+        default: // Si no tienes una sesión iniciada
+            if ($_SERVER["SCRIPT_NAME"] != "/index.php") exit_message();
+            break;
     }
 }
 
